@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jouw Naam — Videomaker</title>
+<meta name="description" content="Portfolio van [jouw naam], videomaker.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbfbfa; --ink:#111; --muted:#8a8a8a; --pill:#f0f0ee; --card:#fff;
+  --shadow:0 10px 40px rgba(0,0,0,.12);
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0e0e0e;--ink:#f4f4f2;--muted:#8d8d8d;--pill:#1c1c1c;--card:#161616;--shadow:0 10px 40px rgba(0,0,0,.6)}
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:"Inter Tight",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+section{padding:96px 24px;max-width:1100px;margin:0 auto}
+
+/* Navigatie */
+nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:10;display:flex;align-items:center;gap:6px;
+  background:var(--card);border-radius:999px;padding:8px 8px 8px 20px;box-shadow:var(--shadow);font-size:14px}
+.logo{font-weight:800;letter-spacing:-.02em;margin-right:14px;font-size:16px}
+nav a.l{padding:8px 14px;border-radius:999px}
+nav a.l:hover{background:var(--pill)}
+.btn{background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-weight:500;font-size:14px;display:inline-block;transition:transform .2s}
+.btn:hover{transform:scale(1.04)}
+@media(max-width:620px){nav a.l{display:none}}
+
+/* Hero */
+.hero{text-align:center;padding-top:150px;padding-bottom:40px}
+.hero small{font-size:14px}
+h1{font-size:clamp(40px,7vw,68px);line-height:1.02;letter-spacing:-.035em;font-weight:500;margin:18px auto 0;max-width:12ch}
+.fan{display:flex;justify-content:center;align-items:center;margin:64px auto 0;height:300px}
+.fan .c{width:min(26vw,230px);aspect-ratio:4/5;border-radius:16px;box-shadow:var(--shadow);background-size:cover;background-position:center;flex:none}
+.fan .c:nth-child(1){transform:rotate(-6deg) translateX(30px);background-image:linear-gradient(135deg,#2c3e50,#4b6a7a)}
+.fan .c:nth-child(2){transform:scale(1.15);z-index:2;background-image:linear-gradient(135deg,#1b1f2a,#5c6b8a)}
+.fan .c:nth-child(3){transform:rotate(6deg) translateX(-30px);background-image:linear-gradient(135deg,#c9a96e,#6f5a2e)}
+.lead{color:var(--muted);max-width:52ch;margin:40px auto 0;font-size:17px}
+
+/* Filter */
+.tabs{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;background:var(--pill);border-radius:999px;padding:6px;width:fit-content;max-width:100%;margin:0 auto 40px}
+.tabs button{font:inherit;font-size:14px;border:0;background:none;color:var(--muted);padding:10px 20px;border-radius:999px;cursor:pointer;transition:.2s}
+.tabs button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+
+/* Video's */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.v{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:16/10;cursor:pointer;border:0;padding:0;display:block;width:100%;text-align:left;color:#fff;font:inherit;background-size:cover;background-position:center}
+.v::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,.7))}
+.v .t{position:absolute;left:20px;bottom:18px;z-index:1}
+.v .t b{display:block;font-size:20px;font-weight:600;letter-spacing:-.01em}
+.v .t span{font-size:13px;opacity:.8}
+.v .p{position:absolute;top:50%;left:50%;width:56px;height:56px;margin:-28px;border-radius:50%;background:rgba(255,255,255,.9);z-index:1;transition:transform .25s}
+.v .p::before{content:"";position:absolute;left:22px;top:17px;border-left:18px solid #111;border-top:11px solid transparent;border-bottom:11px solid transparent}
+.v:hover .p{transform:scale(1.15)}
+.v[hidden]{display:none}
+
+/* Over mij / contact */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.about .photo{aspect-ratio:4/5;border-radius:20px;background:linear-gradient(135deg,#444,#999);background-size:cover;background-position:center}
+h2{font-size:clamp(30px,4.5vw,44px);letter-spacing:-.03em;font-weight:500;line-height:1.1;margin-bottom:20px}
+.about p{color:var(--muted);font-size:17px;margin-bottom:16px}
+@media(max-width:760px){.about{grid-template-columns:1fr}}
+.contact{text-align:center}
+.contact p{color:var(--muted);margin-bottom:28px}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:32px}
+
+/* Pop-up speler */
+dialog{border:0;border-radius:20px;padding:0;width:min(900px,92vw);background:#000;overflow:hidden}
+dialog::backdrop{background:rgba(0,0,0,.7)}
+dialog iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
+dialog .x{position:absolute;top:10px;right:10px;z-index:2;border:0;border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer}
+dialog .none{color:#fff;padding:60px 30px;text-align:center}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav aria-label="Hoofdmenu">
+  <a class="logo" href="#top">JOUWNAAM</a>
+  <a class="l" href="#werk">Werk</a>
+  <a class="l" href="#over">Over mij</a>
+  <a class="btn" href="#contact">Neem contact op</a>
+</nav>
+
+<main id="top">
+  <!-- HERO -->
+  <header class="hero">
+    <small>Videomaker</small>
+    <h1>Verhalen die in beweging komen.</h1>
+    <!-- Vervang de gradiënten door eigen beelden: style="background-image:url('img/foto1.jpg')" -->
+    <div class="fan" aria-hidden="true"><div class="c"></div><div class="c"></div><div class="c"></div></div>
+    <p class="lead">Ik maak video's omdat ik het zelf geweldig vind: van bedrijfsfilms en events tot korte verhalen. Hieronder zie je een selectie van mijn werk.</p>
+  </header>
+
+  <!-- WERK -->
+  <section id="werk">
+    <div class="tabs" role="group" aria-label="Filter op categorie">
+      <button aria-pressed="true" data-f="all">Alles</button>
+      <button aria-pressed="false" data-f="commercial">Commercial</button>
+      <button aria-pressed="false" data-f="event">Events</button>
+      <button aria-pressed="false" data-f="film">Korte films</button>
+      <button aria-pressed="false" data-f="social">Social</button>
+    </div>
+
+    <!-- Per video: data-yt = YouTube-ID (het stukje na ?v= in de link). Vul bij style een eigen thumbnail in. -->
+    <div class="grid">
+      <button class="v" data-cat="commercial" data-yt="" style="background-image:linear-gradient(135deg,#243b55,#141e30)">
+        <i class="p"></i><div class="t"><b>Titel van project 1</b><span>Commercial</span></div></button>
+      <button class="v" data-cat="event" data-yt="" style="background-image:linear-gradient(135deg,#614385,#516395)">
+        <i class="p"></i><div class="t"><b>Titel van project 2</b><span>Event</span></div></button>
+      <button class="v" data-cat="film" data-yt="" style="background-image:linear-gradient(135deg,#3a1c1c,#a4503c)">
+        <i class="p"></i><div class="t"><b>Titel van project 3</b><span>Korte film</span></div></button>
+      <button class="v" data-cat="social" data-yt="" style="background-image:linear-gradient(135deg,#134e5e,#71b280)">
+        <i class="p"></i><div class="t"><b>Titel van project 4</b><span>Social</span></div></button>
+      <button class="v" data-cat="commercial" data-yt="" style="background-image:linear-gradient(135deg,#232526,#6b6b6b)">
+        <i class="p"></i><div class="t"><b>Titel van project 5</b><span>Commercial</span></div></button>
+      <button class="v" data-cat="film" data-yt="" style="background-image:linear-gradient(135deg,#42275a,#734b6d)">
+        <i class="p"></i><div class="t"><b>Titel van project 6</b><span>Korte film</span></div></button>
+    </div>
+  </section>
+
+  <!-- OVER MIJ -->
+  <section id="over">
+    <div class="about">
+      <div class="photo" role="img" aria-label="Foto van jou"></div>
+      <div>
+        <h2>Hoi, ik ben [jouw naam].</h2>
+        <p>Schrijf hier kort waarom je video's maakt, hoe je ermee begon en wat jouw stijl is.</p>
+        <p>Vertel ook welke apparatuur en software je gebruikt, bijvoorbeeld camera, drone en montageprogramma.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <h2>Heb je een idee voor een video?</h2>
+    <p>Stuur me een mailtje, dan gaan we het samen maken.</p>
+    <a class="btn" href="mailto:jouw@email.nl">jouw@email.nl</a>
+  </section>
+</main>
+
+<footer>© <span id="y"></span> Jouw Naam</footer>
+
+<dialog id="player"><button class="x" aria-label="Sluiten">✕</button><div id="slot"></div></dialog>
+
+<script>
+// Filter
+const tabs=[...document.querySelectorAll('.tabs button')], vids=[...document.querySelectorAll('.v')];
+tabs.forEach(b=>b.onclick=()=>{
+  tabs.forEach(t=>t.setAttribute('aria-pressed',t===b));
+  vids.forEach(v=>v.hidden=b.dataset.f!=='all'&&v.dataset.cat!==b.dataset.f);
+});
+// Video-speler
+const dlg=document.getElementById('player'), slot=document.getElementById('slot');
+vids.forEach(v=>v.onclick=()=>{
+  const id=v.dataset.yt;
+  slot.innerHTML=id
+    ? `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen title="Video"></iframe>`
+    : `<p class="none">Nog geen video gekoppeld. Vul bij dit project een YouTube-ID in (data-yt).</p>`;
+  dlg.showModal();
+});
+const close=()=>{dlg.close();slot.innerHTML=''};
+dlg.querySelector('.x').onclick=close;
+dlg.addEventListener('click',e=>{if(e.target===dlg)close()});
+dlg.addEventListener('cancel',()=>slot.innerHTML='');
+document.getElementById('y').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
